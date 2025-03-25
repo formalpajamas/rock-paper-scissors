@@ -1,7 +1,7 @@
 /* create what the console will play in rock paper scissors
 console will have three possible options and will have to be random
 random will give me something between 0-1, use an if to decide what
-each portion is and assign to a variable.
+each portion is and assign to a value of rock, paper, or scissors.
 */
 
 function getComputerChoice() {
@@ -16,7 +16,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = prompt("Let's play rock-paper-scissors! Enter your choice below!");
+    let choice = prompt("Let's play rock-paper-scissors! Enter your selection below!");
 
     if (choice.toLowerCase() === "rock") {
         return "rock";
@@ -36,22 +36,22 @@ function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         message = "You tied";
     } else if (humanChoice === "rock" && computerChoice === "paper") {
-        message = "You lost";
+        message = "You lost that round";
         computerScore += 1;
     } else if (humanChoice === "paper" && computerChoice === "scissors") {
-        message = "You lost";
+        message = "You lost that round";
         computerScore += 1;
     } else if (humanChoice === "scissors" && computerChoice === "rock") {
-        message = "You lost";
+        message = "You lost that round";
         computerScore += 1;
     } else if (humanChoice === "rock" && computerChoice === "scissors") {
-        message = "You won";
+        message = "You won that round";
         humanScore += 1;
     } else if (humanChoice === "paper" && computerChoice === "rock") {
-        message = "You won";
+        message = "You won that round";
         humanScore += 1;
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
-        message = "You won";
+        message = "You won that round";
         humanScore += 1;
     }
 
@@ -60,9 +60,28 @@ function playRound(humanChoice, computerChoice) {
     console.log("Computer Score: " + computerScore);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+/* Need to duplicate this 5 times and declare an ultimate winner at the end.
+Make a variable that stores the number of times the game has been played, once it 
+equals five we declare a winner.
+*/
 
-playRound(humanSelection, computerSelection);
+function playGame() {
+    let round = 0;
+
+    while (round < 5) {
+        playRound(getHumanChoice(), getComputerChoice());
+        round++;
+    }
+
+    if (humanScore === computerScore) {
+        console.log("You and the computer tied!");
+    } else if (humanScore < computerScore) {
+        console.log("The computer beat you this time");
+    } else {
+        console.log("You beat the computer!");
+    }
+}
+
+playGame();
 
 
